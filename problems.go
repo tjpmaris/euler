@@ -115,10 +115,11 @@ By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that 
 
 What is the 10 001st prime number?
 */
-func Problem6() int {
-	var primes = []int{2, 3}
+func Problem7() int {
+	var firstprime = 2
+	var primes = []int{firstprime}
 	var primeslen = len(primes)
-	var i = 5
+	var i = firstprime
 
 	for primeslen < 10001 {
 		if i%1000 == 0 {
