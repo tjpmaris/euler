@@ -7,13 +7,26 @@ func IsPrime(value int) bool {
 func IsPalindrome(value []rune) bool {
 	var length = len(value)
 
-	for i := 0; i < length; i++ {
-		if value[i] != value[length-(i+1)] {
+	for i, v := 0, length-1; i < length/2; i, v = i+1, v-1 {
+		if value[i] != value[v] {
 			return false
 		}
 	}
 
 	return true
+}
+
+func Largest(value []int) int {
+	var length = len(value)
+	var largest = value[0]
+
+	for i := 1; i < length; i++ {
+		if value[i] > largest {
+			largest = value[i]
+		}
+	}
+
+	return largest
 }
 
 func FactorsOf(value int) []int {
@@ -37,4 +50,14 @@ func FactorsOf(value int) []int {
 	}
 
 	return factors
+}
+
+func IsDivisibleBy(num int, values []int) bool {
+	for _, element := range values {
+		if num%element != 0 {
+			return false
+		}
+	}
+
+	return true
 }

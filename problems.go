@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 )
 
 /*
@@ -60,4 +61,51 @@ func Problem3() int {
 	}
 
 	return value
+}
+
+/*
+A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
+
+Find the largest palindrome made from the product of two 3-digit numbers.
+*/
+
+func Problem4() int {
+	var palindromes []int
+	var max = 999
+
+	for i, v := 0, 0; i <= max; v++ {
+		if v == max {
+			v = i
+			i++
+			continue
+		}
+
+		var product = i * v
+		if IsPalindrome([]rune(strconv.Itoa(product))) {
+			palindromes = append(palindromes, product)
+		}
+	}
+
+	return Largest(palindromes)
+}
+
+/*
+2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+
+What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+*/
+func Problem5() int {
+	var values = []int{20, 19, 18, 17, 16, 15, 14, 13, 12, 11}
+
+	var i = Largest(values)
+
+	for true {
+		if IsDivisibleBy(i, values) {
+			return i
+		}
+
+		i++
+	}
+
+	return 0
 }
