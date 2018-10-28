@@ -100,7 +100,7 @@ func Problem5() int {
 	var i = Largest(values)
 
 	for true {
-		if IsDivisibleBy(i, values) {
+		if IsDivisibleByAll(i, values) {
 			return i
 		}
 
@@ -108,4 +108,30 @@ func Problem5() int {
 	}
 
 	return 0
+}
+
+/*
+By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+
+What is the 10 001st prime number?
+*/
+func Problem6() int {
+	var primes = []int{2, 3}
+	var primeslen = len(primes)
+	var i = 5
+
+	for primeslen < 10001 {
+		if i%1000 == 0 {
+			fmt.Printf("i: %v, primesLength: %v, biggestPrime: %v\n", i, primeslen, primes[primeslen-1])
+		}
+
+		if !IsDivisibleByAny(i, primes) {
+			primes = append(primes, i)
+			primeslen++
+		}
+
+		i++
+	}
+
+	return primes[primeslen-1]
 }

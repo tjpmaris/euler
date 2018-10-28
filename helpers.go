@@ -52,7 +52,7 @@ func FactorsOf(value int) []int {
 	return factors
 }
 
-func IsDivisibleBy(num int, values []int) bool {
+func IsDivisibleByAll(num int, values []int) bool {
 	for _, element := range values {
 		if num%element != 0 {
 			return false
@@ -60,4 +60,14 @@ func IsDivisibleBy(num int, values []int) bool {
 	}
 
 	return true
+}
+
+func IsDivisibleByAny(num int, values []int) bool {
+	for _, element := range values {
+		if num%element == 0 {
+			return true
+		}
+	}
+
+	return false
 }
