@@ -34,11 +34,8 @@ func Problem2() int {
 	for i, v := 0, 1; v < 4000000; {
 		var sum = i + v
 
-		fmt.Printf("%d, %d, %d\n", i, v, sum)
-
 		if sum%2 == 0 {
 			value += sum
-			fmt.Printf("value: %d\n", value)
 		}
 
 		i, v = v, sum
@@ -55,9 +52,13 @@ What is the largest prime factor of the number 600851475143 ?
 func Problem3() int {
 	var value = 0
 	var num = 600851475143
+	var factors = FactorsOf(num)
 
-	for _, element := range FactorsOf(num) {
-		fmt.Printf("%d, %t\n", element, IsPrime(element))
+	for i := len(factors) - 1; i >= 0; i-- {
+		if IsPrime(factors[i]) {
+			value = factors[i]
+			break
+		}
 	}
 
 	return value
@@ -81,6 +82,7 @@ func Problem4() int {
 		}
 
 		var product = i * v
+
 		if IsPalindrome([]rune(strconv.Itoa(product))) {
 			palindromes = append(palindromes, product)
 		}
