@@ -4,12 +4,10 @@ func IsPrime(value int) bool {
 	var max = value
 
 	for i := 2; i < max; i++ {
-		var otherFactor = value / i
-
 		if value%i == 0 {
 			return false
 		} else {
-			max = otherFactor + 1
+			max = (value / i) + 1
 		}
 	}
 
@@ -52,16 +50,33 @@ func FactorsOf(value int) []int {
 		if value%i == 0 {
 			factors = append(factors, i)
 			bigFactors = append(bigFactors, otherFactor)
+			max = otherFactor
 		} else {
 			max = otherFactor + 1
 		}
 	}
 
-	for i := len(bigFactors) - 1; i >= 0; i-- {
-		factors = append(factors, bigFactors[i])
-	}
+	factors = append(factors, bigFactors...)
 
 	return factors
+}
+
+func NumFactors(value int) int {
+	var max = value
+	var num = 0
+
+	for i := 1; i < max; i++ {
+		var otherFactor = value / i
+
+		if value%i == 0 {
+			num += 2
+			max = otherFactor
+		} else {
+			max = otherFactor + 1
+		}
+	}
+
+	return num
 }
 
 func IsDivisibleByAll(num int, values []int) bool {
