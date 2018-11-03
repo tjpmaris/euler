@@ -1,7 +1,19 @@
 package main
 
 func IsPrime(value int) bool {
-	return len(FactorsOf(value)) == 0
+	var max = value
+
+	for i := 2; i < max; i++ {
+		var otherFactor = value / i
+
+		if value%i == 0 {
+			return false
+		} else {
+			max = otherFactor + 1
+		}
+	}
+
+	return true
 }
 
 func IsPalindrome(value []rune) bool {
@@ -31,17 +43,17 @@ func Largest(value []int) int {
 
 func FactorsOf(value int) []int {
 	var factors []int
-	var biggestPossibleOtherFactor = value
+	var max = value
 	var bigFactors []int
 
-	for i := 2; i < biggestPossibleOtherFactor; i++ {
+	for i := 2; i < max; i++ {
 		var otherFactor = value / i
 
 		if value%i == 0 {
 			factors = append(factors, i)
 			bigFactors = append(bigFactors, otherFactor)
 		} else {
-			biggestPossibleOtherFactor = otherFactor + 1
+			max = otherFactor + 1
 		}
 	}
 

@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	fmt.Println(Problem12())
+	fmt.Println(Problem10())
 }
