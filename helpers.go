@@ -98,3 +98,25 @@ func IsDivisibleByAny(num int, values []int) bool {
 
 	return false
 }
+
+func Contains(array []int, value int) bool {
+	for _, element := range array {
+		if element == value {
+			return true
+		}
+	}
+
+	return false
+}
+
+func CountSteps(value int, dic map[int]int) int {
+	if dic[value] == 0 {
+		if value%2 == 0 {
+			dic[value] = CountSteps(value/2, dic) + 1
+		} else {
+			dic[value] = CountSteps((value*3)+1, dic) + 1
+		}
+	}
+
+	return dic[value]
+}

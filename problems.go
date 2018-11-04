@@ -9,7 +9,7 @@ import (
 If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
 Find the sum of all the multiples of 3 or 5 below 1000.
 */
-func problem1() int {
+func Problem1() int {
 	var value = 0
 
 	for i := 3; i < 1000; i++ {
@@ -623,4 +623,36 @@ func Problem13() string {
 	sum = extraStringStuff + sum
 
 	return sum[0:10]
+}
+
+/*
+The following iterative sequence is defined for the set of positive integers:
+
+n → n/2 (n is even)
+n → 3n + 1 (n is odd)
+
+Using the rule above and starting with 13, we generate the following sequence:
+
+13 → 40 → 20 → 10 → 5 → 16 → 8 → 4 → 2 → 1
+It can be seen that this sequence (starting at 13 and finishing at 1) contains 10 terms. Although it has not been proved yet (Collatz Problem), it is thought that all starting numbers finish at 1.
+
+Which starting number, under one million, produces the longest chain?
+
+NOTE: Once the chain starts the terms are allowed to go above one million.
+*/
+func Problem14() int {
+	var value = 1
+	var moststeps = 1
+	var dic = map[int]int{1: 1}
+
+	for i := 2; i < 1000000; i++ {
+		var numsteps = CountSteps(i, dic)
+
+		if numsteps > moststeps {
+			moststeps = numsteps
+			value = i
+		}
+	}
+
+	return value
 }
