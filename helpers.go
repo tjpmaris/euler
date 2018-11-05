@@ -1,5 +1,10 @@
 package main
 
+import (
+	"fmt"
+	"strconv"
+)
+
 func IsPrime(value int) bool {
 	var max = value
 
@@ -119,4 +124,103 @@ func CountSteps(value int, dic map[int]int) int {
 	}
 
 	return dic[value]
+}
+
+func AddBig(block []string) string {
+	var extraStuff = 0
+	var sum = ""
+	var i = 0
+
+	for len(block) > 0 {
+		if i < len(block) && len(block[i]) == 0 {
+			fmt.Println("Removing Block")
+			RemoveAt(block, i)
+			continue
+		}
+
+		if i >= len(block) {
+			i = 0
+			fmt.Println("Setting i to 0")
+
+			var extraStringStuff = strconv.Itoa(extraStuff)
+			var len = len(extraStringStuff)
+
+			sum = extraStringStuff[len-1:len] + sum
+
+			extraStringStuff = extraStringStuff[0 : len-1]
+			extraStuff, _ = strconv.Atoi(extraStringStuff)
+		} else {
+
+			var v = len(block[i]) - 1
+
+			extraStuff += int(block[i][v] - '0')
+
+			i++
+		}
+	}
+
+	var extraStringStuff = strconv.Itoa(extraStuff)
+	sum = extraStringStuff + sum
+
+	return sum
+}
+
+func RemoveAt(value []string, index int) {
+	copy(value[index:], value[index+1:])
+	value = value[:len(value)-1]
+}
+
+func MaxLength(value []string) int {
+	var maxlen = 0
+
+	for _, element := range value {
+		if maxlen < len(element) {
+			maxlen = len(element)
+		}
+	}
+
+	return maxlen
+}
+
+func AddStrings(value1 string, value2 string) string {
+	var str1 = Reverse(value1)
+	var str2 = Reverse(value2)
+	var combined = ""
+
+	var len1 = len(str1)
+	var len2 = len(str2)
+
+	var added = 0
+	var index = 0
+
+	for index < len1 || index < len2 {
+		if index < len1 {
+			added += int(rune(str1[index]) - '0')
+		}
+
+		if index < len2 {
+			added += int(rune(str2[index]) - '0')
+		}
+
+		combined += Reverse(strconv.Itoa(added))[0:1]
+		added /= 10
+
+		index++
+	}
+
+	if added > 0 {
+		combined += strconv.Itoa(added)
+	}
+
+	return Reverse(combined)
+}
+
+func Reverse(str string) string {
+	var reverse = []rune(str)
+
+	for i, v := 0, len(reverse)-1; i < v; i, v = i+1, v-1 {
+		reverse[i], reverse[v] = reverse[v], reverse[i]
+	}
+
+	return string(reverse)
 }

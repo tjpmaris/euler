@@ -598,31 +598,11 @@ func Problem13() string {
 		"53503534226472524250874054075591789781264330331690",
 	}
 
-	var imax = len(block) - 1
-	var vmax = len(block[0]) - 1
-	var extraStuff = 0
-	var sum = ""
-	for i, v := 0, vmax; v >= 0; i++ {
-		extraStuff += int(block[i][v] - '0')
-
-		if i == imax {
-			i = -1
-			v--
-
-			var extraStringStuff = strconv.Itoa(extraStuff)
-			var len = len(extraStringStuff)
-
-			sum = extraStringStuff[len-1:len] + sum
-
-			extraStringStuff = extraStringStuff[0 : len-1]
-			extraStuff, _ = strconv.Atoi(extraStringStuff)
-		}
+	for i := 1; i < len(block); i++ {
+		block[0] = AddStrings(block[0], block[i])
 	}
 
-	var extraStringStuff = strconv.Itoa(extraStuff)
-	sum = extraStringStuff + sum
-
-	return sum[0:10]
+	return block[0][0:10]
 }
 
 /*
@@ -700,4 +680,8 @@ func Problem15() int {
 	}
 
 	return grid[20][20]
+}
+
+func Problem16() int {
+	return 0
 }
